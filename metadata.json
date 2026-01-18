@@ -1,0 +1,9 @@
+
+{
+  "name": "Elegant Wedding - Eternal Love",
+  "description": "A high-end, single-page wedding website featuring a countdown, bridal party grid, gallery, FAQ accordion, venue directions, accommodation details, and an AI-powered wedding concierge.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

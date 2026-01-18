@@ -21,7 +21,7 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
+  const navLinks: { name: string; href: string; highlight?: boolean }[] = [
     { name: 'Home', href: '#home' },
     { name: 'Bridal Party', href: '#bridal-party' },
     { name: 'Venue', href: '#venue' },

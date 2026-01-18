@@ -5,9 +5,9 @@ import { WEDDING_DATE, COUPLE_NAMES, VENUE_DETAILS, FAQS } from '../constants';
 // const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const getWeddingAssistantResponse = async (userMessage: string) => {
-    // Instantiate inside the function to ensure process.env.API_KEY is available 
+    // Instantiate inside the function to ensure import.meta.env.VITE_API_KEY is available 
   // and to follow the rule of creating a new instance before making an API call.
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_API_KEY });
   const systemInstruction = `
     You are a friendly and elegant Wedding Concierge for ${COUPLE_NAMES.full}'s wedding.
     The wedding is on ${WEDDING_DATE.toLocaleDateString()} at ${VENUE_DETAILS.name}.

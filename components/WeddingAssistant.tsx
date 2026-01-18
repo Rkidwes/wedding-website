@@ -28,7 +28,7 @@ const WeddingAssistant: React.FC = () => {
     setIsTyping(true);
 
     const response = await getWeddingAssistantResponse(userMsg);
-    setMessages(prev => [...prev, { text: response, isUser: false }]);
+    setMessages(prev => [...prev, { text: response || "I'm sorry, I couldn't process that. Please try again.", isUser: false }]);
     setIsTyping(false);
   };
 

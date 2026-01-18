@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  base: '/wedding-website/',
   plugins: [react()],
   define: {
     // This allows process.env to work in the browser, preventing ReferenceErrors

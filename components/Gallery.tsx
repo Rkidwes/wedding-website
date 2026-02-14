@@ -113,12 +113,12 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <section id="gallery" className="py-24 bg-white overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-4">
+    <section id="gallery" className="py-16 md:py-24 bg-white overflow-hidden">
+      <div className="max-w-[1600px] mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4">Our Memories</h2>
-          <div className="h-1 w-20 bg-accent mx-auto mb-4"></div>
-          <p className="serif-text italic text-secondary text-lg">Just a few of the amazing moments that led us here.</p>
+          <h2 className="text-5xl md:text-6xl mb-4">Our memories</h2>
+          <div className="h-1 w-20 bg-accent mx-auto mb-4 "></div>
+          <p className="sans-serif-text text-secondary text-lg max-w-[80ch] mx-auto">Here are just a few of the amazing moments that have led us here... it may seem like we're always on holiday but really we often just forget to get the camera out!</p>
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

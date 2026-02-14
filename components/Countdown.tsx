@@ -29,7 +29,7 @@ const Countdown: React.FC = () => {
   }, []);
 
   const TimerBox = ({ label, value }: { label: string, value: number }) => (
-    <div className="flex flex-col items-center px-4 md:px-8 border-r border-gray-100 last:border-0">
+    <div className="flex flex-col items-center px-4 md:px-8 border-r border-gray-200 last:border-0">
       <span className="text-4xl md:text-6xl font-black text-gray-900">{value.toString().padStart(2, '0')}</span>
       <span className="text-xs md:text-sm uppercase tracking-widest text-secondary mt-2">{label}</span>
     </div>
@@ -37,8 +37,8 @@ const Countdown: React.FC = () => {
 
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-4xl mx-auto text-center px-4">
-        <h2 className="text-3xl md:text-4xl mb-12 text-gray-800">Counting down the days...</h2>
+      <div className="max-w-4xl mx-auto text-center px-6">
+        <h2 className="text-5xl md:text-6xl mb-12 text-gray-800">We're counting down the days...</h2>
         <div className="flex justify-center flex-wrap gap-y-8">
           <TimerBox label="Days" value={timeLeft.days} />
           <TimerBox label="Hours" value={timeLeft.hours} />

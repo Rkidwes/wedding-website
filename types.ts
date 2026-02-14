@@ -5,6 +5,7 @@ export interface BridalPartyMember {
   role: string;
   image: string;
   description: string;
+  position?: string;
 }
 
 export interface FAQItem {

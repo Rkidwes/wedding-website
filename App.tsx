@@ -42,12 +42,12 @@ const App: React.FC = () => {
             isScrolled ? 'text-gray-900' : 'text-white'
           }`}>
             v<img 
-                src="./images/wildflower20.png" 
+                src="/images/wildflower20.png" 
                 style={{ width: '15px'}}
               />w
             {/* V<span className="text-accent">&</span>W */}
             {/* <img 
-                src="./images/monogram.png" 
+                src="/images/monogram.png" 
                 style={{ width: '60px'}}
               /> */}
           </a>
@@ -87,12 +87,12 @@ const App: React.FC = () => {
 
               <a href="#home" className={`text-xl font-500 uppercase flex items-center gap-1 transition-colors duration-500 text-gray-900`}>
             v<img 
-                src="./images/wildflower20.png" 
+                src="/images/wildflower20.png" 
                 style={{ width: '15px'}}
               />w
             {/* V<span className="text-accent">&</span>W */}
             {/* <img 
-                src="./images/monogram.png" 
+                src="/images/monogram.png" 
                 style={{ width: '60px'}}
               /> */}
           </a>

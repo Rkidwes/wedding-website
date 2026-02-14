@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
       <div 
         className="absolute inset-0 pointer-events-none opacity-60"
         style={{ 
-          backgroundImage: "url('./images/flower-pattern_medium.png')",
+          backgroundImage: "url('/images/flower-pattern_medium.png')",
           backgroundRepeat: "repeat",
           backgroundPosition: "left top",
           backgroundSize: "1000px"
@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{ 
-          backgroundImage: "url('./images/wildflowers_small.png')",
+          backgroundImage: "url('/images/wildflowers_small.png')",
           backgroundRepeat: "repeat-x",
           backgroundPosition: "center bottom -150px",
           backgroundSize: "946px"

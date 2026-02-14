@@ -104,7 +104,7 @@ const RSVPForm: React.FC = () => {
         <div 
           className="absolute z- inset-0 pointer-events-none opacity-60 z-[-1]"
           style={{ 
-            backgroundImage: "url('./images/flower-pattern_medium.png')",
+            backgroundImage: "url('/images/flower-pattern_medium.png')",
             backgroundRepeat: "repeat",
             backgroundPosition: "left top",
             backgroundSize: "1000px"
@@ -134,7 +134,7 @@ const RSVPForm: React.FC = () => {
         <div 
           className="absolute z- inset-0 pointer-events-none opacity-60 z-[-1]"
           style={{ 
-            backgroundImage: "url('./images/flower-pattern_medium.png')",
+            backgroundImage: "url('/images/flower-pattern_medium.png')",
             backgroundRepeat: "repeat",
             backgroundPosition: "left top",
             backgroundSize: "1000px"

@@ -10,7 +10,7 @@ const Venue: React.FC = () => {
       <div 
         className="absolute z- inset-0 pointer-events-none opacity-60 z-[-1]"
         style={{ 
-          backgroundImage: "url('./images/flower-pattern_medium.png')",
+          backgroundImage: "url('/images/flower-pattern_medium.png')",
           backgroundRepeat: "repeat",
           backgroundPosition: "left top",
           backgroundSize: "1000px"
@@ -55,7 +55,7 @@ const Venue: React.FC = () => {
         
         <div className="h-[500px] w-full bg-gray-800 rounded-2xl overflow-hidden shadow-2xl relative">
           <img 
-            src="./images/main_barn.jpg" 
+            src="/images/main_barn.jpg" 
             alt="Venue" 
             className="w-full h-full object-cover opacity-60"
           />

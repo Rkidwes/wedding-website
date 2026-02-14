@@ -49,7 +49,7 @@ const Accommodation: React.FC = () => {
             </div>
             <div className="lg:w-1/3 bg-gray-100 relative min-h-[300px]">
               <img 
-                src="./images/hampton-hilton.webp" 
+                src="/images/hampton-hilton.webp" 
                 alt={PRIMARY_ACCOMMODATION.name}
                 className="absolute inset-0 w-full h-full object-cover"
               />

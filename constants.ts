@@ -15,10 +15,10 @@ export const VENUE_DETAILS = {
 };
 
 export const BRIDAL_PARTY: BridalPartyMember[] = [
-  { id: '1', name: 'Sofia Mayr', role: 'Maid of Honour', image: './images/party/sofia.jpg', description: 'Best friend since kindergarten.', position: 'bottom left' },
-  { id: '2', name: 'Veronika Panchenko', role: 'Bridesmaid', image: './images/party/veronika.jpg', description: 'Julian\'s brother and life-long rival.' },
-  { id: '3', name: 'Richard Cridford', role: 'Best Man', image: './images/party/rich.jpg', description: 'College roommate and travel buddy.', position: 'top' },
-  { id: '4', name: 'Joe Pateman', role: 'Best Man', image: './images/party/joe.jpg', description: 'Absolute bloody legend.', position: 'top' },
+  { id: '1', name: 'Sofia Mayr', role: 'Maid of Honour', image: '/images/party/sofia.jpg', description: 'Best friend since kindergarten.', position: 'bottom left' },
+  { id: '2', name: 'Veronika Panchenko', role: 'Bridesmaid', image: '/images/party/veronika.jpg', description: 'Julian\'s brother and life-long rival.' },
+  { id: '3', name: 'Richard Cridford', role: 'Best Man', image: '/images/party/rich.jpg', description: 'College roommate and travel buddy.', position: 'top' },
+  { id: '4', name: 'Joe Pateman', role: 'Best Man', image: '/images/party/joe.jpg', description: 'Absolute bloody legend.', position: 'top' },
   // { id: '5', name: 'Ava Mitchell', role: 'Bridesmaid', image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=400&h=500', description: 'Cousin and fashion advisor.' },
   // { id: '6', name: 'Noah Brooks', role: 'Groomsman', image: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&q=80&w=400&h=500', description: 'Adventure partner in climbing.' },
 ];
@@ -50,14 +50,14 @@ export const ALTERNATIVE_ACCOMMODATIONS: Accommodation[] = [
 ];
 
 export const GALLERY_IMAGES = [
-  './images/gallery/switzerland-2024.JPG',
-  './images/gallery/menorca-2023.jpeg',
-  './images/gallery/edinburgh-2023.JPG',
-  './images/gallery/new-york-2023.jpg',
-  './images/gallery/majorca-2024.jpeg',
-  './images/gallery/liverpool-2025.jpg',
-  './images/gallery/lisbon-2024.jpg',
-  './images/gallery/menorca-2023_2.jpeg',
-  './images/gallery/lillibrooke-2023.jpg',
-  './images/gallery/edinburgh-2025.jpg',
+  '/images/gallery/switzerland-2024.JPG',
+  '/images/gallery/menorca-2023.jpeg',
+  '/images/gallery/edinburgh-2023.JPG',
+  '/images/gallery/new-york-2023.jpg',
+  '/images/gallery/majorca-2024.jpeg',
+  '/images/gallery/liverpool-2025.jpg',
+  '/images/gallery/lisbon-2024.jpg',
+  '/images/gallery/menorca-2023_2.jpeg',
+  '/images/gallery/lillibrooke-2023.jpg',
+  '/images/gallery/edinburgh-2025.jpg',
 ];

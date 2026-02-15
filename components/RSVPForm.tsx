@@ -7,6 +7,7 @@ import React, { useState } from 'react';
  * 3. Paste that URL into the FORM_ENDPOINT constant below
  */
 const FORM_ENDPOINT = "https://api.web3forms.com/submit"; // Web3Forms endpoint
+const USE_WEB3FORMS_IN_DEV = false; // Set to true to test with real API in development
 
 interface GuestEntry {
   firstName: string;
@@ -82,17 +83,22 @@ const handleSubmit = async (e: React.FormEvent) => {
     .join("\n");
 
   const payload = {
-    access_key: "bc2338b4-228b-4209-ac1b-997e546c8ae2", // Web3Forms access key
+    // access_key: "INVALID_KEY_FOR_TESTING_12345", // Web3Forms access key - TEMPORARILY INVALID FOR TESTING
+    access_key: "bc2338b4-228b-4209-ac1b-997e546c8ae2", // Web3Forms access key - REPLACE WITH YOUR ACTUAL KEY
     email,
     attendance,
-    guestCount: guests.length,
+    guest_count: guests.length,
     // 👇 human-friendly view in your inbox (one line per person)
     guests_table
     // Note: intentionally NOT sending `website` (honeypot) or raw `guests` array.
   };
 
-  if (!FORM_ENDPOINT) {
-    console.log("No FORM_ENDPOINT configured. Simulating submission:", payload);
+  // Check if we're in development mode and web3forms is disabled
+  const isDev = import.meta.env.DEV;
+  const shouldSimulate = isDev && !USE_WEB3FORMS_IN_DEV;
+
+  if (!FORM_ENDPOINT || shouldSimulate) {
+    console.log("Simulating submission (dev mode):", payload);
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
@@ -122,26 +128,31 @@ const handleSubmit = async (e: React.FormEvent) => {
   }
 };
 
-  if (submitted) {
-    return (
-      <section id="rsvp" className="py-16 md:py-24 relative" style={{
-        backgroundColor: '#a4c0b1'
-      }}>
-        <div 
-          className="absolute z- inset-0 pointer-events-none opacity-60 z-[-1]"
-          style={{ 
-            backgroundImage: "url('/images/flower-pattern_medium.png')",
-            backgroundRepeat: "repeat",
-            backgroundPosition: "left top",
-            backgroundSize: "1000px"
-          }}
-        />
-        <div className="max-w-xl mx-auto bg-white p-12 rounded-3xl text-center animate-in fade-in zoom-in duration-500">
+  // Single section with conditional content inside
+  return (
+    <section id="rsvp" className="py-16 md:py-24 px-6 relative" style={{
+      backgroundColor: '#a4c0b1'
+    }}>
+      <div 
+        className="absolute z- inset-0 pointer-events-none opacity-60 z-[-1]"
+        style={{ 
+          backgroundImage: "url('/images/flower-pattern_medium.png')",
+          backgroundRepeat: "repeat",
+          backgroundPosition: "left top",
+          backgroundSize: "1000px"
+        }}
+      />
+
+      {/* Success State - Thank You Message */}
+      {submitted ? (
+        <div className="max-w-xl mx-auto bg-white p-12 rounded-3xl text-center">
           <div className="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+            </svg>
           </div>
           <h2 className="text-5xl mb-4">Thank You!</h2>
-          <p className="sans-serif-text text-gray-600 text-lg">Your response has been recorded and if you're coming,we can't wait to see you there!</p>
+          <p className="sans-serif-text text-gray-600 text-lg">Your response has been recorded and if you're coming, we can't wait to see you there!</p>
           <button 
             onClick={resetForm} 
             className="mt-8 text-sm text-accent underline hover:text-gray-900 transition-colors uppercase font-bold tracking-widest"
@@ -149,24 +160,9 @@ const handleSubmit = async (e: React.FormEvent) => {
             Submit another RSVP
           </button>
         </div>
-      </section>
-    );
-  }
-
-  return (
-    <section id="rsvp" className="py-16 md:py-24 px-6 relative" style={{
-        backgroundColor: '#a4c0b1'
-      }}>
-        <div 
-          className="absolute z- inset-0 pointer-events-none opacity-60 z-[-1]"
-          style={{ 
-            backgroundImage: "url('/images/flower-pattern_medium.png')",
-            backgroundRepeat: "repeat",
-            backgroundPosition: "left top",
-            backgroundSize: "1000px"
-          }}
-        />
-      <div className="max-w-4xl mx-auto bg-white p-8 md:p-16 rounded-3xl shadow-2xl border-accent">
+      ) : (
+        /* Form State */
+        <div className="max-w-4xl mx-auto bg-white p-8 md:p-16 rounded-3xl shadow-2xl border-accent">
         <div className="text-center mb-12">
           <h2 className="text-5xl md:text-6xl mb-4">Will you join us?</h2>
           <div className="h-1 w-20 bg-accent mx-auto mb-4"></div>
@@ -277,8 +273,11 @@ const handleSubmit = async (e: React.FormEvent) => {
           <button type="submit" disabled={loading} className="btn w-full py-5 bg-gray-900 text-white transition-all font-bold uppercase disabled:opacity-50 active:scale-95">
             {loading ? 'Processing...' : 'Confirm RSVP'}
           </button>
+
+          <small className='text-center block'>If you're having trouble with this form, please don't hesitate to give one of us a call.</small>
         </form>
-      </div>
+        </div>
+      )}
     </section>
   );
 };

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 /**
@@ -7,7 +6,7 @@ import React, { useState } from 'react';
  * 2. Create a new form and copy your unique endpoint URL
  * 3. Paste that URL into the FORM_ENDPOINT constant below
  */
-const FORM_ENDPOINT = ""; // e.g., "https://formspree.io/f/your-id"
+const FORM_ENDPOINT = "https://api.web3forms.com/submit"; // Web3Forms endpoint
 
 interface GuestEntry {
   firstName: string;
@@ -27,12 +26,16 @@ const RSVPForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [attendance, setAttendance] = useState('Accepting');
 
+  // 🔒 Honeypot field (bots will often fill this)
+  const [website, setWebsite] = useState(''); // must remain empty for humans
+
   const resetForm = () => {
     setGuests([{ firstName: '', lastName: '', dietary: '' }]);
     setEmail('');
     setAttendance('Accepting');
     setSubmitted(false);
     setError(null);
+    setWebsite('');
   };
 
   const addGuest = () => {
@@ -58,11 +61,28 @@ const RSVPForm: React.FC = () => {
     setLoading(true);
     setError(null);
 
+    // 🪤 Honeypot check — if filled, treat as spam and bail out silently
+    if (website.trim().length > 0) {
+      // Option A (recommended): pretend success so bots don't retry
+      setTimeout(() => {
+        setLoading(false);
+        setSubmitted(true);
+      }, 300);
+      return;
+
+      // Option B: just drop it quietly (uncomment to use)
+      // setLoading(false);
+      // return;
+    }
+
     const payload = {
+      access_key: "bc2338b4-228b-4209-ac1b-997e546c8ae2", // Web3Forms access key
       email,
       attendance,
       guestCount: guests.length,
-      guests: guests 
+      guests,
+      // Send the honeypot field too (empty for humans; populated for bots)
+      website
     };
 
     if (!FORM_ENDPOINT) {
@@ -154,6 +174,20 @@ const RSVPForm: React.FC = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-10">
+          {/* 🪤 Honeypot input (hidden from users & assistive tech) */}
+          <div aria-hidden="true" className="hidden">
+            <label htmlFor="website">Website</label>
+            <input
+              id="website"
+              name="website"
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-10 border-b border-gray-300">
             <div>
               <label className="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-4">Attending?</label>

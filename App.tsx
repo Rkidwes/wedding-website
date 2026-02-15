@@ -21,6 +21,20 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle hash navigation on initial page load
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      // Wait for content to render and animations to settle
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500); // Delay to allow reveal animations to complete
+    }
+  }, []);
+
   const navLinks: { name: string; href: string; highlight?: boolean }[] = [
     { name: 'Home', href: '#home' },
     { name: 'FAQ', href: '#faq' },
@@ -38,9 +52,13 @@ const App: React.FC = () => {
         isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm h-20' : 'bg-transparent h-24'
       }`}>
         <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-          <a href="#home" className={`text-xl font-500 uppercase flex items-center gap-1 transition-colors duration-500 ${
-            isScrolled ? 'text-gray-900' : 'text-white'
-          }`}>
+          <a 
+            href="#home" 
+            className={`text-xl font-500 uppercase flex items-center gap-1 transition-colors duration-500 ${
+              isScrolled ? 'text-gray-900' : 'text-white'
+            }`}
+            style={{ color: isScrolled ? undefined : '#ffffff' }}
+          >
             v<img 
                 src="/images/wildflower20.png" 
                 style={{ width: '15px'}}
@@ -60,6 +78,7 @@ const App: React.FC = () => {
                 key={link.name}
                 href={link.href} 
                 className={`nav-link ${isScrolled ? 'text-gray-900' : 'text-white'}`}
+                style={{ color: isScrolled ? undefined : '#ffffff' }}
               >
                 {link.name}
               </a>
@@ -71,6 +90,7 @@ const App: React.FC = () => {
           <button 
             className="md:hidden text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            style={{ color: '#ffffff' }}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"} />

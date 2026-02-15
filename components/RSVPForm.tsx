@@ -75,12 +75,21 @@ const RSVPForm: React.FC = () => {
       // return;
     }
 
+  const flatGuests: Record<string, string> = {};
+    guests.forEach((g, i) => {
+      const n = i + 1;
+      flatGuests[`Guest ${n} - First Name`] = g.firstName || '';
+      flatGuests[`Guest ${n} - Last Name`]  = g.lastName  || '';
+      flatGuests[`Guest ${n} - Dietary`]    = g.dietary   || '';
+    });
+
+
     const payload = {
       access_key: "bc2338b4-228b-4209-ac1b-997e546c8ae2", // Web3Forms access key
       email,
       attendance,
       guestCount: guests.length,
-      guests,
+      ...flatGuests,
       // Send the honeypot field too (empty for humans; populated for bots)
       website
     };
@@ -176,7 +185,7 @@ const RSVPForm: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-10">
           {/* 🪤 Honeypot input (hidden from users & assistive tech) */}
           <div aria-hidden="true" className="hidden">
-            <label htmlFor="website">Website</label>
+            <label htmlFor="website">Website New</label>
             <input
               id="website"
               name="website"

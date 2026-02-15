@@ -56,74 +56,71 @@ const RSVPForm: React.FC = () => {
     setGuests(newGuests);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
 
-    // 🪤 Honeypot check — if filled, treat as spam and bail out silently
-    if (website.trim().length > 0) {
-      // Option A (recommended): pretend success so bots don't retry
-      setTimeout(() => {
-        setLoading(false);
-        setSubmitted(true);
-      }, 300);
-      return;
+  // 🪤 Honeypot check — if filled, treat as spam and bail out silently
+  if (website.trim().length > 0) {
+    // Pretend success so bots don't retry
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+    }, 300);
+    return;
+  }
 
-      // Option B: just drop it quietly (uncomment to use)
-      // setLoading(false);
-      // return;
-    }
+  // Build a readable, 2‑column “pseudo‑table” as a multi-line string.
+  // Web3Forms will convert \n to <br> in the email, so you get one row per line. [3](https://feedback.web3forms.com/updates/p/new-lessbrgreater-tag-support-for-new-lines)
+  const guests_table = guests
+    .map((g) => {
+      const fullName = `${g.firstName} ${g.lastName}`.trim();
+      const diet = g.dietary?.trim() || "None";
+      return `${fullName} | ${diet}`;
+    })
+    .join("\n");
 
-  const flatGuests: Record<string, string> = {};
-    guests.forEach((g, i) => {
-      const n = i + 1;
-      flatGuests[`Guest ${n} - First Name`] = g.firstName || '';
-      flatGuests[`Guest ${n} - Last Name`]  = g.lastName  || '';
-      flatGuests[`Guest ${n} - Dietary`]    = g.dietary   || '';
+  const payload = {
+    access_key: "bc2338b4-228b-4209-ac1b-997e546c8ae2", // Web3Forms access key
+    email,
+    attendance,
+    guestCount: guests.length,
+    // 👇 human-friendly view in your inbox (one line per person)
+    guests_table
+    // Note: intentionally NOT sending `website` (honeypot) or raw `guests` array.
+  };
+
+  if (!FORM_ENDPOINT) {
+    console.log("No FORM_ENDPOINT configured. Simulating submission:", payload);
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+    }, 1500);
+    return;
+  }
+
+  try {
+    const response = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     });
 
-
-    const payload = {
-      access_key: "bc2338b4-228b-4209-ac1b-997e546c8ae2", // Web3Forms access key
-      email,
-      attendance,
-      guestCount: guests.length,
-      ...flatGuests,
-      // Send the honeypot field too (empty for humans; populated for bots)
-      website
-    };
-
-    if (!FORM_ENDPOINT) {
-      console.log("No FORM_ENDPOINT configured. Simulating submission:", payload);
-      setTimeout(() => {
-        setLoading(false);
-        setSubmitted(true);
-      }, 1500);
-      return;
+    if (response.ok) {
+      setSubmitted(true);
+    } else {
+      throw new Error("Failed to send RSVP.");
     }
-
-    try {
-      const response = await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-      } else {
-        throw new Error("Failed to send RSVP.");
-      }
-    } catch (err) {
-      setError("Something went wrong. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch (err) {
+    setError("Something went wrong. Please try again later.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (submitted) {
     return (

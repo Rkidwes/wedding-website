@@ -13,6 +13,7 @@ interface GuestEntry {
   firstName: string;
   lastName: string;
   dietary: string;
+  requests: string;
 }
 
 const RSVPForm: React.FC = () => {
@@ -22,7 +23,7 @@ const RSVPForm: React.FC = () => {
   
   // State for dynamic guest list
   const [guests, setGuests] = useState<GuestEntry[]>([
-    { firstName: '', lastName: '', dietary: '' }
+    { firstName: '', lastName: '', dietary: '', requests: '' }
   ]);
   const [email, setEmail] = useState('');
   const [attendance, setAttendance] = useState('Accepting');
@@ -31,7 +32,7 @@ const RSVPForm: React.FC = () => {
   const [website, setWebsite] = useState(''); // must remain empty for humans
 
   const resetForm = () => {
-    setGuests([{ firstName: '', lastName: '', dietary: '' }]);
+    setGuests([{ firstName: '', lastName: '', dietary: '', requests: '' }]);
     setEmail('');
     setAttendance('Accepting');
     setSubmitted(false);
@@ -40,7 +41,7 @@ const RSVPForm: React.FC = () => {
   };
 
   const addGuest = () => {
-    setGuests([...guests, { firstName: '', lastName: '', dietary: '' }]);
+    setGuests([...guests, { firstName: '', lastName: '', dietary: '', requests: '' }]);
   };
 
   const removeGuest = (index: number) => {
@@ -78,7 +79,8 @@ const handleSubmit = async (e: React.FormEvent) => {
     .map((g) => {
       const fullName = `${g.firstName} ${g.lastName}`.trim();
       const diet = g.dietary?.trim() || "None";
-      return `${fullName} | ${diet}`;
+      const req = g.requests?.trim() || "None";
+      return `${fullName} | Dietary: ${diet} | Requests: ${req}`;
     })
     .join("\n");
 
@@ -257,7 +259,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                     <input required type="text" value={guest.firstName} onChange={(e) => updateGuest(index, 'firstName', e.target.value)} className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md placeholder-gray-500" placeholder="First Name" />
                     <input required type="text" value={guest.lastName} onChange={(e) => updateGuest(index, 'lastName', e.target.value)} className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md placeholder-gray-500" placeholder="Last Name" />
                   </div>
-                  <input type="text" value={guest.dietary} onChange={(e) => updateGuest(index, 'dietary', e.target.value)} className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md placeholder-gray-500" placeholder="Dietary Requirements" />
+                  <input type="text" value={guest.dietary} onChange={(e) => updateGuest(index, 'dietary', e.target.value)} className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md placeholder-gray-500 mb-4" placeholder="Dietary Requirements" />
+                  <textarea value={guest.requests} onChange={(e) => updateGuest(index, 'requests', e.target.value)} className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md placeholder-gray-500 min-h-[80px] resize-y" placeholder="We want all of our guests to have a fun time so if there is a song or songs that will guarantee to get you dancing, or anything else that might ensure you have a great night please let us know here"></textarea>
                 </div>
               ))}
             </div>

@@ -12,6 +12,7 @@ const USE_WEB3FORMS_IN_DEV = false; // Set to true to test with real API in deve
 interface GuestEntry {
   firstName: string;
   lastName: string;
+  attending: string;
   dietary: string;
   requests: string;
 }
@@ -23,25 +24,23 @@ const RSVPForm: React.FC = () => {
   
   // State for dynamic guest list
   const [guests, setGuests] = useState<GuestEntry[]>([
-    { firstName: '', lastName: '', dietary: '', requests: '' }
+    { firstName: '', lastName: '', attending: 'Accepting', dietary: '', requests: '' }
   ]);
   const [email, setEmail] = useState('');
-  const [attendance, setAttendance] = useState('Accepting');
 
   // 🔒 Honeypot field (bots will often fill this)
   const [website, setWebsite] = useState(''); // must remain empty for humans
 
   const resetForm = () => {
-    setGuests([{ firstName: '', lastName: '', dietary: '', requests: '' }]);
+    setGuests([{ firstName: '', lastName: '', attending: 'Accepting', dietary: '', requests: '' }]);
     setEmail('');
-    setAttendance('Accepting');
     setSubmitted(false);
     setError(null);
     setWebsite('');
   };
 
   const addGuest = () => {
-    setGuests([...guests, { firstName: '', lastName: '', dietary: '', requests: '' }]);
+    setGuests([...guests, { firstName: '', lastName: '', attending: 'Accepting', dietary: '', requests: '' }]);
   };
 
   const removeGuest = (index: number) => {
@@ -78,9 +77,10 @@ const handleSubmit = async (e: React.FormEvent) => {
   const guests_table = guests
     .map((g) => {
       const fullName = `${g.firstName} ${g.lastName}`.trim();
+      const status = g.attending === 'Accepting' ? 'Attending' : 'Not Attending';
       const diet = g.dietary?.trim() || "None";
       const req = g.requests?.trim() || "None";
-      return `${fullName} | Dietary: ${diet} | Requests: ${req}`;
+      return `${fullName} | ${status} | Dietary: ${diet} | Requests: ${req}`;
     })
     .join("\n");
 
@@ -88,8 +88,9 @@ const handleSubmit = async (e: React.FormEvent) => {
     // access_key: "INVALID_KEY_FOR_TESTING_12345", // Web3Forms access key - TEMPORARILY INVALID FOR TESTING
     access_key: "bc2338b4-228b-4209-ac1b-997e546c8ae2", // Web3Forms access key - REPLACE WITH YOUR ACTUAL KEY
     email,
-    attendance,
     guest_count: guests.length,
+    attending_count: guests.filter(g => g.attending === 'Accepting').length,
+    declining_count: guests.filter(g => g.attending === 'Declining').length,
     // 👇 human-friendly view in your inbox (one line per person)
     guests_table
     // Note: intentionally NOT sending `website` (honeypot) or raw `guests` array.
@@ -192,8 +193,8 @@ const handleSubmit = async (e: React.FormEvent) => {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-10 border-b border-gray-300">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-10 border-b border-gray-300 items-center">
+            {/* <div>
               <label className="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-4">Attending?</label>
               <div className="flex gap-4">
                 <label className="flex-1 cursor-pointer group">
@@ -223,9 +224,9 @@ const handleSubmit = async (e: React.FormEvent) => {
                   </div>
                 </label>
               </div>
-            </div>
-            <div>
-              <label className="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-4">Contact Email</label>
+            </div> */}
+            {/* <div> */}
+              <label className="block text-xs uppercase tracking-widest font-bold text-gray-600">Contact Email</label>
               <input 
                 required
                 type="email" 
@@ -234,14 +235,14 @@ const handleSubmit = async (e: React.FormEvent) => {
                 className="w-full bg-gray-50 p-4 rounded-xl focus:ring-2 focus:ring-accent transition-all outline-none border border-gray-300 placeholder-gray-500"
                 placeholder="your@email.com"
               />
-            </div>
+            {/* </div> */}
           </div>
 
           <div className="space-y-8">
-            <h3 className="text-4xl md:text-5xl text-gray-900 flex items-center gap-4">
+            {/* <h3 className="text-4xl md:text-5xl text-gray-900 flex items-center gap-4">
               Guest List
               <span className="h-px flex-1 bg-gray-100"></span>
-            </h3>
+            </h3> */}
             
             <div className="space-y-6">
               {guests.map((guest, index) => (
@@ -259,8 +260,67 @@ const handleSubmit = async (e: React.FormEvent) => {
                     <input required type="text" value={guest.firstName} onChange={(e) => updateGuest(index, 'firstName', e.target.value)} className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md placeholder-gray-500" placeholder="First Name" />
                     <input required type="text" value={guest.lastName} onChange={(e) => updateGuest(index, 'lastName', e.target.value)} className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md placeholder-gray-500" placeholder="Last Name" />
                   </div>
+                  
+                  <div className="mb-6">
+                    <label className="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-3">Attending?</label>
+                    <div className="flex gap-6">
+                      <label className="flex-1 cursor-pointer group attending accepting">
+                        <input 
+                          type="radio" 
+                          name={`attendance-${index}`}
+                          value="Accepting" 
+                          className="hidden peer" 
+                          checked={guest.attending === 'Accepting'}
+                          onChange={() => updateGuest(index, 'attending', 'Accepting')}
+                        />
+                        {/* min-h-[50px] flex items-center justify-center p-3 text-center border-2 border-gray-300 rounded-xl peer-checked:border-gray-900 peer-checked:bg-gray-900 peer-checked:text-white transition-all font-bold text-[11px] uppercase tracking-widest group-hover:border-accent/30 */}
+                        <div className="text-gray-600">
+                          Happily Accepting
+                        </div>
+                      </label>
+                      <label className="flex-1 cursor-pointer group attending declining">
+                        <input 
+                          type="radio" 
+                          name={`attendance-${index}`}
+                          value="Declining" 
+                          className="hidden peer"
+                          checked={guest.attending === 'Declining'}
+                          onChange={() => updateGuest(index, 'attending', 'Declining')}
+                        />
+                        <div className="text-gray-600">
+                          Regretfully Declining
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                  
                   <input type="text" value={guest.dietary} onChange={(e) => updateGuest(index, 'dietary', e.target.value)} className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md placeholder-gray-500 mb-4" placeholder="Dietary Requirements" />
-                  <textarea value={guest.requests} onChange={(e) => updateGuest(index, 'requests', e.target.value)} className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md placeholder-gray-500 min-h-[80px] resize-y" placeholder="We want all of our guests to have a fun time so if there is a song or songs that will guarantee to get you dancing, or anything else that might ensure you have a great night please let us know here"></textarea>
+                  
+                  {/* Wrapper div with grid to make textarea stretch to placeholder text height */}
+                  <div className="grid" style={{ gridTemplateColumns: '1fr' }}>
+                    {/* Placeholder text that sets the height */}
+                    <div 
+                      className="p-3 text-md text-gray-500 pointer-events-none whitespace-pre-wrap"
+                      style={{ 
+                        gridArea: '1 / 1 / 2 / 2',
+                        // visibility: guest.requests ? 'hidden' : 'visible'
+                      }}
+                    >
+                      {guest.requests ? guest.requests : `We want all of our guests to have a fun time so if there is a song or songs that will guarantee to get you dancing, or anything else that might ensure you have a great night please let us know here.\n\n`}
+                      
+                    </div>
+                    {/* Textarea overlaying the placeholder */}
+                    <textarea 
+                      value={guest.requests} 
+                      onChange={(e) => updateGuest(index, 'requests', e.target.value)} 
+                      className="w-full bg-white border border-gray-300 p-3 rounded-lg text-md resize-y placeholder-gray-500"
+                      placeholder='We want all of our guests to have a fun time so if there is a song or songs that will guarantee to get you dancing, or anything else that might ensure you have a great night please let us know here.'
+                      style={{ 
+                        gridArea: '1 / 1 / 2 / 2',
+                        minHeight: '100%'
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>

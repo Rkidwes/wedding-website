@@ -53,7 +53,7 @@ const Venue: React.FC = () => {
           </div>
 
           <div className="space-y-6">
-            <p className='text-lg'>For more information about the venue please visit <a href="https://lillibrookemanor.co.uk/" target="_blank" rel="noopener noreferrer" className="text-accent underline">Lillibrooke Manor</a>.</p>
+            <p className='text-lg  tracking-widest'>For more information about the venue please visit <a href="https://lillibrookemanor.co.uk/" target="_blank" rel="noopener noreferrer" className="text-accent underline" style={{ whiteSpace: "nowrap"}}>Lillibrooke Manor</a>.</p>
           </div>
         </div>
         

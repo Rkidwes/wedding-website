@@ -24,28 +24,28 @@ const Accommodation: React.FC = () => {
                 {/* {PRIMARY_ACCOMM_TYPE(PRIMARY_ACCOMMODATION.type)} •  */}
                 {PRIMARY_ACCOMMODATION.distance}
               </p>
-              <p className="text-gray-600 sans-serif-text text-lg mb-8 leading-relaxed max-w-2xl">
-                {PRIMARY_ACCOMMODATION.description}
-              </p>
-              <div>
-              <a 
+              <div dangerouslySetInnerHTML={{ __html: PRIMARY_ACCOMMODATION.description }} />
+              {/* <a 
                 href={PRIMARY_ACCOMMODATION.website} 
-                className="mt-auto inline-block text-gray-900 font-bold border-b-2 border-accent/30 hover:border-accent transition-all uppercase tracking-widest text-[12px] pb-1"
+                className="mb-6 mt-auto inline-block text-gray-900 font-bold border-b-2 border-accent/30 hover:border-accent transition-all uppercase tracking-widest text-[12px] pb-1"
               >
                 View Hotel
-              </a>
-              <div className="bg-gray-50 p-6 rounded-2xl border border-dashed border-accent/40 inline-flex flex-col sm:flex-row items-center gap-6">
-                <div className="text-center sm:text-left">
-                  <p className="text-xs uppercase tracking-[0.2em] font-bold text-gray-400 mb-1">Discount Code</p>
-                  <p>Please call the hotel and use this code when booking:</p>
-                  <p className="text-2xl font-black text-gray-900 tracking-wider">{PRIMARY_ACCOMMODATION.discountCode}</p>
-                </div>
-                <div className="h-px w-full sm:h-12 sm:w-px bg-gray-200"></div>
-                <div className="text-center">
-                  <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-3">Or Scan to Book</p>
-                  <div className="bg-white p-2 rounded-lg shadow-sm border border-gray-100">
-                    <img src={PRIMARY_ACCOMMODATION.qrCodeUrl} alt="Booking QR Code" className="w-24 h-24" />
+              </a> */}
+              <div>
+              <div className="bg-gray-50 p-6 rounded-2xl border border-dashed border-accent/40 inline-flex flex-col sm:flex-row items-stretch gap-6">
+                <div className="text-center min-w-fit">
+                  <p className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-3">Scan or click to Book</p>
+                  <div className="bg-white p-2 rounded-lg shadow-sm border border-gray-100 w-fit mx-auto">
+                    <a href={PRIMARY_ACCOMMODATION.booking} target="_blank" rel="noopener noreferrer">
+                      <img src={PRIMARY_ACCOMMODATION.qrCodeUrl} alt="Booking QR Code" className="w-24 h-24" />
+                    </a>    
                   </div>
+                </div>
+                <div className="h-px w-full sm:h-auto sm:w-px bg-gray-200"></div>
+                <div className="text-center sm:text-left">
+                  <p className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-3">Discount Code</p>
+                  <p>If using the website you will need to click 'Special rates' and then enter the following as a 'Group code', otherwise you can quote it when booking over the phone:</p>
+                  <p className="text-2xl font-black text-gray-900 tracking-wider mt-2">{PRIMARY_ACCOMMODATION.discountCode}</p>
                 </div>
               </div>
               </div>

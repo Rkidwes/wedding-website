@@ -1,82 +1,3 @@
-// Custom SCSS Overrides for Wedding Site
-// Add your custom styles here to override Tailwind defaults
-
-// Variables
-// $primary-color: #8b5cf6;
-// $secondary-color: #ec4899;
-// $text-color: #1f2937;
-// $background-light: #faf5ff;
-
-// Typography overrides
-// body {
-//   font-family: 'Your Custom Font', sans-serif;
-// }
-
-// Custom utility classes
-// .custom-container {
-//   max-width: 1200px;
-//   margin: 0 auto;
-//   padding: 0 1rem;
-// }
-
-// Component-specific overrides
-// Example: Override hero section
-// .hero-section {
-//   background: linear-gradient(135deg, $primary-color, $secondary-color);
-//   min-height: 100vh;
-// }
-
-// Example: Override buttons
-// button {
-//   &.custom-btn {
-//     background-color: $primary-color;
-//     border-radius: 8px;
-//     padding: 12px 24px;
-//     transition: all 0.3s ease;
-    
-//     &:hover {
-//       background-color: darken($primary-color, 10%);
-//       transform: translateY(-2px);
-//     }
-//   }
-// }
-
-// Example: Override cards
-// .card {
-//   background: white;
-//   border-radius: 12px;
-//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-//   padding: 2rem;
-  
-//   &:hover {
-//     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-//   }
-// }
-
-// Example: Override form inputs
-// input, textarea, select {
-//   &.custom-input {
-//     border: 2px solid #e5e7eb;
-//     border-radius: 8px;
-//     padding: 12px;
-    
-//     &:focus {
-//       border-color: $primary-color;
-//       outline: none;
-//       box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
-//     }
-//   }
-// }
-
-// Responsive utilities
-// @media (max-width: 768px) {
-//   // Add mobile overrides here
-// }
-
-// @media (min-width: 769px) and (max-width: 1024px) {
-//   // Add tablet overrides here
-// }
-
 nav {
     .nav-link {
         background-image: linear-gradient(currentColor, currentColor);
@@ -142,4 +63,42 @@ section[id] {
 .answer {
     display: grid;
     gap: 1em;
+}
+
+.attending {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    &:before {
+        content: "";
+        display: block;
+        width: 24px;
+        height: 24px;
+        background-color: white;
+        border: 1px solid rgb(209 213 219);
+        border-radius: 0.5em;
+    }
+    &:has(input:checked) {
+        &::after {
+            position: absolute;
+            left: var(--left); 
+            top: var(--top);
+            transform: translateY(-50%);
+            content: var(--content);
+            font-size: 32px;
+            font-weight: 700;
+            color: #7f9e8e;
+        }
+    } 
+    &.accepting {
+        --left: 3px;
+        --top: calc(50% - 0.125em);
+        --content: "✓";;
+    }
+    &.declining {
+        --left: 0px;
+        --top: calc(50%);
+        --content: "✗";
+    }
 }

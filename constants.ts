@@ -38,9 +38,10 @@ export const PRIMARY_ACCOMMODATION = {
   type: 'Luxury Hotel',
   distance: '10.4 miles away',
   website: 'https://www.hilton.com/en/hotels/hycomhx-hampton-high-wycombe/?arrivalDate=2026-07-18&departureDate=2026-07-19&numRooms=1&numAdults=1&numChildren=0&room1ChildAges=&room1AdultAges=&displayCurrency=GBP',
-  description: 'A modern, large hotel with colourful comfortable rooms and free breakfast. We have reserved a limited number of rooms at a special rate for our guests.',
+  description: '<p class="text-gray-600 sans-serif-text text-lg mb-4 leading-relaxed max-w-2xl">A modern, large hotel with colourful comfortable rooms and free breakfast. We have reserved a <strong><em>limited</em></strong> number of rooms at a special rate for our guests.</p>',
   discountCode: 'CHH91U',
-  qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://vance-wedding-rsvp.example'
+  booking: 'https://www.hilton.com/en/hotels/hycomhx-hampton-high-wycombe/?arrivalDate=2026-07-18&departureDate=2026-07-19&numRooms=1&numAdults=1&numChildren=0&room1ChildAges=&room1AdultAges=&displayCurrency=GBP',
+  qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.hilton.com/en/hotels/hycomhx-hampton-high-wycombe/?arrivalDate=2026-07-18&departureDate=2026-07-19&numRooms=1&numAdults=1&numChildren=0&room1ChildAges=&room1AdultAges=&displayCurrency=GBP'
 };
 
 export const ALTERNATIVE_ACCOMMODATIONS: Accommodation[] = [

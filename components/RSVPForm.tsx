@@ -193,7 +193,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             />
           </div>
 
-          <div className="grid grid-cols-1 gap-y-4 gap-x-6 pb-10 border-b border-gray-300 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6 pb-10 border-b border-gray-300 items-center">
             {/* <div>
               <label className="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-4">Attending?</label>
               <div className="flex gap-4">

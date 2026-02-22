@@ -10,7 +10,7 @@ const FAQ: React.FC = () => {
     <section className="py-16 md:py-24 bg-gray-100">
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-5xl md:text-6xl mb-4">Wedding FAQs</h2>
+          <h2 className="text-5xl md:text-6xl mb-4">Wedding Information</h2>
           <div className="h-1 w-20 bg-accent mx-auto mb-4"></div>
           <p className="sans-serif-text text-secondary text-lg max-w-[80ch]">Everything you need to know.</p>
         </div>
@@ -33,11 +33,10 @@ const FAQ: React.FC = () => {
                 </span>
               </button>
               <div 
-                className={`overflow-hidden transition-all duration-300 ${openIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}
+                className={`overflow-hidden transition-all duration-300 ${openIndex === index ? 'opacity-100' : 'max-h-0 opacity-0'}`}
               >
-                <p className="sans-serif-text text-gray-600 pb-4 pr-12">
-                  {faq.answer}
-                </p>
+                {/* pb-4 */}
+                <div className="answer sans-serif-text text-gray-600 pr-12" dangerouslySetInnerHTML={{ __html: faq.answer }} />
               </div>
             </div>
           ))}

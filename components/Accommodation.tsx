@@ -27,15 +27,17 @@ const Accommodation: React.FC = () => {
               <p className="text-gray-600 sans-serif-text text-lg mb-8 leading-relaxed max-w-2xl">
                 {PRIMARY_ACCOMMODATION.description}
               </p>
+              <div>
               <a 
                 href={PRIMARY_ACCOMMODATION.website} 
                 className="mt-auto inline-block text-gray-900 font-bold border-b-2 border-accent/30 hover:border-accent transition-all uppercase tracking-widest text-[12px] pb-1"
               >
                 View Hotel
               </a>
-              {/* <div className="bg-gray-50 p-6 rounded-2xl border border-dashed border-accent/40 inline-flex flex-col sm:flex-row items-center gap-6">
+              <div className="bg-gray-50 p-6 rounded-2xl border border-dashed border-accent/40 inline-flex flex-col sm:flex-row items-center gap-6">
                 <div className="text-center sm:text-left">
-                  <p className="text-xs uppercase tracking-[0.2em] font-bold text-gray-400 mb-1">Use Discount Code</p>
+                  <p className="text-xs uppercase tracking-[0.2em] font-bold text-gray-400 mb-1">Discount Code</p>
+                  <p>Please call the hotel and use this code when booking:</p>
                   <p className="text-2xl font-black text-gray-900 tracking-wider">{PRIMARY_ACCOMMODATION.discountCode}</p>
                 </div>
                 <div className="h-px w-full sm:h-12 sm:w-px bg-gray-200"></div>
@@ -45,7 +47,8 @@ const Accommodation: React.FC = () => {
                     <img src={PRIMARY_ACCOMMODATION.qrCodeUrl} alt="Booking QR Code" className="w-24 h-24" />
                   </div>
                 </div>
-              </div> */}
+              </div>
+              </div>
             </div>
             <div className="lg:w-1/3 bg-gray-100 relative min-h-[300px]">
               <img 

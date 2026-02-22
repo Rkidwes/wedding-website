@@ -24,7 +24,7 @@ const Venue: React.FC = () => {
             Nestled in the heart of Berkshire, surrounded by 15 acres of enchanting English countryside, we hope you agree that this exquisite 15th‑century estate will provide a breathtaking backdrop for us to say 'I do'.
           </p>
           
-          <div className="space-y-6">
+          <div className="space-y-6 mb-8">
             <div className="flex items-start gap-4 justify-center lg:justify-start">
               {/* <div className="w-6 h-6 mt-1 flex-shrink-0 text-accent">
                 <svg fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
@@ -50,6 +50,10 @@ const Venue: React.FC = () => {
                 <p className="text-gray-400 max-w-md">{VENUE_DETAILS.directions}</p>
               </div>
             </div> */}
+          </div>
+
+          <div className="space-y-6">
+            <p className='text-lg'>For more information about the venue please visit <a href="https://lillibrookemanor.co.uk/" target="_blank" rel="noopener noreferrer" className="text-accent underline">Lillibrooke Manor</a>.</p>
           </div>
         </div>
         

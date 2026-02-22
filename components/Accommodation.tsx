@@ -44,7 +44,7 @@ const Accommodation: React.FC = () => {
                 <div className="h-px w-full sm:h-auto sm:w-px bg-gray-200"></div>
                 <div className="text-center sm:text-left">
                   <p className="text-xs uppercase tracking-widest font-bold text-gray-400 mb-3">Discount Code</p>
-                  <p className="text-gray-600 sans-serif-text text-md mb-4 leading-normal">If using the website you will need to click 'Special rates' and then enter the following as a 'Group code', otherwise you can quote it when booking over the phone:</p>
+                  <p className="text-gray-600 sans-serif-text text-md leading-normal">If using the website you will need to click 'Special rates' and then enter the following as a 'Group code', otherwise you can quote it when booking over the phone:</p>
                   <p className="text-2xl font-black text-gray-900 tracking-wider mt-2">{PRIMARY_ACCOMMODATION.discountCode}</p>
                 </div>
               </div>

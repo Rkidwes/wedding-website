@@ -100,7 +100,9 @@ const App: React.FC = () => {
       </nav>
 
       {/* Mobile Menu Drawer */}
-      <div className={`fixed inset-0 z-50 bg-white transition-transform duration-200 md:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed inset-0 z-50 bg-white transition-all duration-200 md:hidden ${isMobileMenuOpen ? 'left-0' : 'left-full'}`}>
+        {/* translate-x-full ${isMobileMenuOpen ? '!translate-x-0' : ''} */}
+         {/* ${!isMobileMenuOpen ? '-translate-x-0' : ''} */}
         <div className="p-8 flex flex-col h-full">
           <div className="flex justify-between items-center mb-8">
              {/* <span className="text-xl font-black uppercase">Menu</span> */}

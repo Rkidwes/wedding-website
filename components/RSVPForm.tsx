@@ -262,8 +262,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                   </div>
                   
                   <div className="mb-6">
-                    <label className="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-3">Attending?</label>
-                    <div className="flex gap-6">
+                    <label className="block text-xs uppercase tracking-widest font-bold text-gray-600 mb-4">Attending?</label>
+                    <div className="grid sm:flex gap-y-4 gap-x-6">
                       <label className="flex-1 cursor-pointer group attending accepting">
                         <input 
                           type="radio" 

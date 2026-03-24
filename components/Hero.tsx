@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
             className="btn inline-block px-10 py-4 bg-gray-900 text-white rounded-full hover:bg-accent transition-colors duration-300 tracking-widest text-sm uppercase"
             // style={{ backgroundColor: 'rgb(17, 24, 39)', color: '#ffffff', fontSize: '0.875rem' }}
           >
-            All the info
+            All the info - Updated
           </a>
         </div>
       </div>
